@@ -54,7 +54,7 @@ nominal_value = calc_v_0(resistors);
 
 % Iterate through all the assignments and find the assignments producing the
 % minimum and maximum voltage based on the randomly generated resistors
-function [min, min_assignments, max, max_assignments, results] = compute_min_max(n)
+function [min, max, results, mean_value, std_deviation] = compute_min_max(n)
 
     min = nominal_value;
     max = nominal_value;
@@ -70,6 +70,11 @@ function [min, min_assignments, max, max_assignments, results] = compute_min_max
         max = v;
         max_assignments = rs;
       end
+
+    % also return the mean and std_deviation of the distribution
+    mean_value = mean(results);
+    variance = var(results);
+    std_deviation = sqrt(variance);
 end
 end
 
@@ -89,15 +94,14 @@ end
 
 for n = [100,1000,10000]
 
-  [min, min_assignments, max, max_assignments, results] = compute_min_max(n);
+  [min, max, results, mean_value, std_deviation] = compute_min_max(n);
   
   nominal_value
   min
-  min_assignments
   max
-  max_assignments
+  mean_value
+  std_deviation
   percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
   plotHistogram(results);
 end
-
 end
