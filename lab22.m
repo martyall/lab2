@@ -59,7 +59,7 @@ function plotHistogram(data)
     xlabel('Data Values');
     ylabel('Frequency');
     % Save the histogram to a file in the current directory
-    hname=sprintf('histogram%d.png', size(data));
+    hname=sprintf('histogram%d.png', length(data));
     print(hname, '-dpng');
 end
 
