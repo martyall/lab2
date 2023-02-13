@@ -92,10 +92,10 @@ function plotHistogram(data)
     print(hname, '-dpng');
 end
 
-for n = [100,1000,10000]
+for m = [100,1000,10000,100000]
 
-  [min, max, results, mean_value, std_deviation] = compute_min_max(n);
-  
+  [min, max, results, mean_value, std_deviation] = compute_min_max(m);
+  m
   nominal_value
   min
   max
@@ -105,3 +105,36 @@ for n = [100,1000,10000]
   plotHistogram(results);
 end
 end
+
+
+% m = 100 
+% nominal_value = 0.1739
+% min = 0.1644
+% max = 0.1854
+% mean_value = 0.1741
+% std_deviation = 0.0044
+% percent_range = -5.4419    6.5825
+% 
+% m = 1000
+% nominal_value = 0.1739
+% min = 0.1623
+% max = 0.1877
+% mean_value = 0.1742
+% std_deviation = 0.0049
+% percent_range = -6.6557    7.9453
+% 
+% m = 10000
+% nominal_value = 0.1739
+% min = 0.1613
+% max = 0.1871
+% mean_value = 0.1739
+% std_deviation = 0.0050
+% percent_range = -7.2498    7.5738
+% 
+% m = 100000
+% nominal_value = 0.1739
+% min = 0.1606
+% max = 0.1879
+% mean_value = 0.1739
+% std_deviation =  0.0050
+% percent_range = -7.6417    8.0144
