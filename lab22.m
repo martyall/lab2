@@ -49,6 +49,8 @@ end
 % Calculate the voltage from the nominal resistor values
 nominal_value = calc_v_0(resistors);
 
+% This function plots a histogram of the data. The name of the histogram
+% is hard coded1
 function plotHistogram(data)
     % Plot histogram of the data
     histogram(data);
@@ -57,7 +59,8 @@ function plotHistogram(data)
     xlabel('Data Values');
     ylabel('Frequency');
     % Save the histogram to a file in the current directory
-    print('histogram100.png', '-dpng');
+    hname=sprintf('histogram%d.png', size(data));
+    print(hname, '-dpng');
 end
 
 
@@ -79,21 +82,23 @@ function [min, min_assignments, max, max_assignments, results] = compute_min_max
         max = v;
         max_assignments = rs;
       end
-  end
+end
 end
 
-[min, min_assignments, max, max_assignments, results] = compute_min_max(100);
+for n = [100,1000,10000,100000]
 
-nominal_value
-min
-min_assignments
-max
-max_assignments
-plotHistogram(results);
+  [min, min_assignments, max, max_assignments, results] = compute_min_max(n);
+  
+  nominal_value
+  min
+  min_assignments
+  max
+  max_assignments
+  percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
+  plotHistogram(results);
+end
 
 
-% range
-percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
 
 
 end
