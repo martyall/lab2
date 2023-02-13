@@ -97,38 +97,4 @@ for n = [100,1000,10000,100000]
   percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
   plotHistogram(results);
 end
-
-
-
-
 end
-
-%Solutions
-%nominal_value =
-%
-%    0.1739
-%
-%
-%min =
-%
-%    0.1620
-%
-%
-%min_assignments =
-%
-%         950        2100        2850        3800
-%
-%
-%max =
-%
-%    0.1846
-%
-%
-%max_assignments =
-%
-%        1050        1900        2850        3800
-%
-%
-%percent_range =
-%
-%   -6.8230    6.1538
