@@ -38,7 +38,7 @@ function rs = assign_resistors(max_set)
 end
 end
 
-% Calculate the voltage from the nominal resistor values
+% calculate v_0 using the specified values for the resistors
 nominal_value = calc_v_0(resistors);
 
 % Iterate through all the assignments and find the assignments producing the
@@ -64,13 +64,18 @@ end
 
 [min, min_assignments, max, max_assignments] = compute_min_max();
 
+% Now we just want to print the values of these variables as the solutions
+% to the problem
+
 nominal_value
 min
+% The assignments to the resistors that lead to the minimum voltage difference
 min_assignments
 max
+% The assignments to the resistors that lead to the maximum voltage difference
 max_assignments
 
-% range
+% The range for v_0 given as a percentage difference from the nominal value
 percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
 
 end

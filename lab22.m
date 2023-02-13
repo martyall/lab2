@@ -18,8 +18,15 @@ v_s = 10;
 % each resistor has a 5% tolerance
 tolerance = 0.05;
 
+% calculate v_0 using the specified values for the resistors
+function v_0 = calc_v_0(rs)
+  n = rs(1) * rs(4);
+  d = (rs(1) + rs(2)) * (rs(3) + rs(4)) + rs(1) * rs(2);
+  v_0 = n / d;
+end
+
 % this function assigns a random value to the resistor
-% given the tolerance rance. First generate a sign (either positive or negative),
+% given the tolerance range. First generate a sign (either positive or negative),
 % then generate a value in [r - r * tolerance, r + r * tolerance].
 function [resistor] = make_random_resistor(r)
   s = rand;
@@ -32,13 +39,9 @@ function [resistor] = make_random_resistor(r)
   resistor = r + sign * (tolerance * s * r);
 end
 
-% using 0 based index for the resistor list, calculate v_0
-function v_0 = calc_v_0(rs)
-  n = rs(1) * rs(4);
-  d = (rs(1) + rs(2)) * (rs(3) + rs(4)) + rs(1) * rs(2);
-  v_0 = n / d;
-end
 
+% This function assigns a resistance value to each resistor 
+% with the specified tolerance
 function rs = assign_resistors()
     rs = [NaN,NaN,NaN,NaN];
     for i = 1:4
@@ -48,21 +51,6 @@ end
 
 % Calculate the voltage from the nominal resistor values
 nominal_value = calc_v_0(resistors);
-
-% This function plots a histogram of the data. The name of the histogram
-% is hard coded1
-function plotHistogram(data)
-    % Plot histogram of the data
-    histogram(data);
-    % Set title and axis labels
-    title('Histogram of Data');
-    xlabel('Data Values');
-    ylabel('Frequency');
-    % Save the histogram to a file in the current directory
-    hname=sprintf('histogram%d.png', length(data));
-    print(hname, '-dpng');
-end
-
 
 % Iterate through all the assignments and find the assignments producing the
 % minimum and maximum voltage based on the randomly generated resistors
@@ -85,7 +73,21 @@ function [min, min_assignments, max, max_assignments, results] = compute_min_max
 end
 end
 
-for n = [100,1000,10000,100000]
+% This function plots a histogram of the data.
+function plotHistogram(data)
+    % Plot histogram of the data
+    histogram(data);
+    % Set title and axis labels
+    htitle = sprintf('V0 histogram for %d trials', length(data));
+    title(htitle);
+    xlabel('V0 Values');
+    ylabel('Frequency');
+    % Save the histogram to a file in the current directory
+    hname=sprintf('histogram%d.png', length(data));
+    print(hname, '-dpng');
+end
+
+for n = [100,1000,10000]
 
   [min, min_assignments, max, max_assignments, results] = compute_min_max(n);
   
@@ -97,4 +99,5 @@ for n = [100,1000,10000,100000]
   percent_range = [100 * ((min / nominal_value) - 1), 100 * ((max / nominal_value) - 1)]
   plotHistogram(results);
 end
+
 end
