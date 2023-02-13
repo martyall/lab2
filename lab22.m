@@ -57,7 +57,7 @@ function plotHistogram(data)
     xlabel('Data Values');
     ylabel('Frequency');
     % Save the histogram to a file in the current directory
-    print('histogram.png', '-dpng');
+    print('histogram100.png', '-dpng');
 end
 
 
@@ -82,7 +82,7 @@ function [min, min_assignments, max, max_assignments, results] = compute_min_max
   end
 end
 
-[min, min_assignments, max, max_assignments, results] = compute_min_max(10);
+[min, min_assignments, max, max_assignments, results] = compute_min_max(100);
 
 nominal_value
 min
