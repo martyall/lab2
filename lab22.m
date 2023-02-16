@@ -36,7 +36,8 @@ function [resistor] = make_random_resistor(r)
   else
     sign = 1;
   end
-  resistor = r + sign * (tolerance * s * r);
+  t = rand;
+  resistor = r + sign * (tolerance * t * r);
 end
 
 
